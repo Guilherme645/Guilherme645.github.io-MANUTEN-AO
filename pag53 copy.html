@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Destino</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .resultado-container {
+            margin-bottom: 10px;
+        }
+        hr{
+          border-width: 2px; 
+          color: black;
+        }
+        button {
+            margin-top: -28px; /* Adiciona um espaçamento acima do botão */
+            background-color: #4046a0;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            font-size: 25px;
+            margin-left: 10px;
+        }
+            .button-container{
+                margin-top: -39px;
+                margin-left: 150px;
+
+            }
+    </style>
+</head>
+
+<body>
+    <img src="imagem 46.png" alt="">
+    <div class="resultado-container">
+        <strong>Fusível:</strong>
+        <strong><p id="spanResultadoFusivel" class="verde">Nenhum resultado disponível.</p></strong>
+    </div>
+    <hr>
+    <div class="resultado-container">
+        <strong>Placa:</strong>
+        <p id="spanEscolhaUsuario" class="verde">Nenhuma escolha do usuário disponível.</p>
+    </div>
+    <hr>
+    <div>
+        <label for="avaliacaoVentilador"><strong>Ventilador:</strong></label>
+        <span id="avaliacaoVentilador"></span>
+    </div>
+    <hr>
+    <div><br>
+        <div id="codigoPlaca"></div>
+    </div>
+    <hr>
+    <div>
+        <h4>Bateria</h4>
+        <div id="resultadoBateria"></div>
+    </div>
+    <hr>
+    <div class="resultado-section">
+        <h4>Carregador</h4>
+        <span id="mensagem1"></span>
+    </div>
+    <hr>
+    <div class="resultado-section">
+        <h4>Tensão da Saída</h4>
+        <span id="mensagem2"></span>
+    </div>
+    <hr>
+    <div class="resultado-section">
+        <h4>Bateria</h4>
+        <span id="mensagem3"></span>
+    </div>
+    <hr>
+    <div class="resultado-section">
+        <h4>Tensão da Saída</h4>
+         <span id="mensagem4"></span>
+    </div>
+    <hr>
+<br>
+    <div class="button">
+        <button onclick="window.location.href='pag53.html'"><strong>Próximo</strong></button>
+    </div>
+    <div class="button-container">
+        <button onclick="copiarTudo()"><strong>Copiar Tudo</strong></button>
+    </div>
+
+    <script>
+        // Retrieve values from localStorage
+        var avaliacaoVentilador = localStorage.getItem('avaliacaoVentilador') || 'Não avaliado';
+        var resultadoFusivel = localStorage.getItem('resultadoFusivel') || 'Nenhum resultado disponível.';
+        var resultadoPlaca = localStorage.getItem('resultadoPlaca') || 'Nenhuma escolha do usuário disponível.';
+        var resultadoCarregador = localStorage.getItem('resultadoCarregador');
+        var resultadoTensaoSaida = localStorage.getItem('resultadoTensaoSaida');
+        var resultadoBateria = localStorage.getItem('resultadoBateria');
+
+        // Display verification results on the page
+        document.getElementById('spanResultadoFusivel').textContent = resultadoFusivel;
+        document.getElementById('spanEscolhaUsuario').textContent = resultadoPlaca;
+        document.getElementById('avaliacaoVentilador').innerText = avaliacaoVentilador;
+        document.getElementById('mensagem1').textContent = resultadoCarregador;
+        document.getElementById('mensagem2').textContent = resultadoTensaoSaida;
+        document.getElementById('mensagem3').textContent = resultadoBateria;
+        document.getElementById('mensagem4').textContent = resultadoTensaoSaida; // Use resultadoTensaoSaida here
+
+        // Retrieve the stored code from localStorage
+        const codigoPlaca = localStorage.getItem('codigoPlaca') || 'Código da Placa não encontrado.';
+
+        // Display the code on the page
+        document.getElementById('codigoPlaca').textContent = `Código da Placa: ${codigoPlaca}`;
+
+        // Retrieve the result from localStorage
+        const resultadoBateriaTexto = localStorage.getItem('resultadoBateria') || 'Nenhum resultado disponível.';
+        const resultadoDiv = document.getElementById('resultadoBateria');
+
+        // Display the result on the page
+        resultadoDiv.textContent = `Resultado do Teste: ${resultadoBateriaTexto}`;
+
+        // Function to copy the content of the page
+        function copiarTudo() {
+            // Extract only the text content of the document
+            const textContent = document.body.innerText;
+
+            // Use the Clipboard API to copy text content
+            navigator.clipboard.writeText(textContent)
+                .then(() => alert('Conteúdo da página copiado para a área de transferência!'))
+                .catch((err) => console.error('Erro ao copiar:', err));
+        }
+    </script>
+</body>
+
+</html>

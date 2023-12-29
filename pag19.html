@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página do Ventilador</title>
+</head>
+<body>
+    <h1>Informações do Ventilador</h1>
+    <h2>Avaliação do Ventilador</h2>
+    <img src="Imagem18.jpg" alt="">
+    <h3>O ventilador irá sempre fornecer <br> as seguintes informações (numero + "VDC".)</h3>
+    <label for="avaliacao"><strong>Está bom?</strong></label>
+    <select id="avaliacao">
+        <option value="sim">Substituída</option>
+        <option value="nao">Não foi solicitada a substituição</option>
+        <option value="nao_tem">Não tem ventilador</option>
+    </select>
+    <div class="button">
+        <button id="proximoBtn" onclick="nextPage()"><strong>Próximo</strong></button>
+    </div>
+
+    <script>
+        // Adicionar evento de escuta para o menu suspenso de avaliação
+        document.getElementById('avaliacao').addEventListener('change', function() {
+            var avaliacao = document.getElementById('avaliacao').value;
+            localStorage.setItem('avaliacaoVentilador', avaliacao);
+        });
+
+        // Função para verificar se uma opção foi selecionada antes de ir para a próxima página
+        function nextPage() {
+            var avaliacaoSelecionada = document.getElementById('avaliacao').value;
+            if (avaliacaoSelecionada === "") {
+                alert("Por favor, escolha uma opção de avaliação antes de prosseguir.");
+            } else {
+                // Redirecionar para a próxima página
+                window.location.href = 'pag11.html';
+            }
+        }
+    </script>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        button{
+            margin-top: 50px;
+            background-color: #4046a0;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            font-size: 25px;
+            margin-left: 1080px;
+        }
+    </style>
+</body>
+</html>

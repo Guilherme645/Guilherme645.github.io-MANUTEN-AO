@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        font-family: Arial, Helvetica, sans-serif;
+    }
+</style>
+<img src="Captura_de_tela_2023-11-18_125706-removebg-preview.png" alt="">
+<body><br>
+    <button type="button" onclick="openPage('pag303.html')"><strong>placa</strong></button>
+    <p></p>
+    <button type="button" onclick="openPage('pag303.html')"><strong>trafo</strong></button>
+    <p></p>
+    <button type="button" onclick="exibirMensagem('Falar com o supervisor para bateria')">bateria</button><p></p>
+    <button type="button" onclick="exibirMensagem('Falar com o supervisor para botão')">botão</button><p></p>
+    <button type="button" onclick="exibirMensagem('Falar com o supervisor para mal contato')">mal contato</button>
+    <p id="mensagem"></p>
+</body>
+<script>
+    function openPage(url) {
+            window.location.href = url;
+            exibirMensagem("Falar com o supervisor");
+        }
+
+        function exibirMensagem(mensagem) {
+            var mensagemElement = document.getElementById("mensagem");
+            mensagemElement.innerHTML = mensagem;
+        }
+</script>
+</html>

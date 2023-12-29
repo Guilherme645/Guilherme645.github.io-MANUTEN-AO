@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário com 4 Caixas de Texto</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 25px;
+        }
+
+        button {
+            background-color: #4046a0;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            font-size: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="Captura_de_tela_2023-11-18_125706-removebg-preview.png" alt="Imagem de exemplo">
+
+    <form id="meuFormulario" onsubmit="salvarDados()">
+        <div>
+            <label for="campo1">Técnico responsável:</label>
+            <input type="text" id="campo1" name="campo1" required>
+        </div>
+
+        <div>
+            <label for="campo2">Data:</label>
+            <input type="date" id="campo2" name="campo2" required>
+        </div>
+
+        <div>
+            <label for="campo3">Número O.s:</label>
+            <input type="text" id="campo3" name="campo3" required>
+        </div>
+
+        <div>
+            <label for="campo4">Potência:</label>
+            <input type="text" id="campo4" name="campo4" required>
+            <strong>Va.</strong><br><br>
+            <button onclick="window.location.href='pag29.html'"><strong>Próximo</strong></button>
+        </div>
+    </form>
+
+    <script>
+        function salvarDados() {
+            // Obtém os valores dos campos
+            var tecnico = document.getElementById("campo1").value;
+            var data = document.getElementById("campo2").value;
+            var numeroOS = document.getElementById("campo3").value;
+            var potencia = document.getElementById("campo4").value;
+
+            // Armazena os valores no localStorage
+            localStorage.setItem("tecnico", tecnico);
+            localStorage.setItem("data", data);
+            localStorage.setItem("numeroOS", numeroOS);
+            localStorage.setItem("potencia", potencia);
+        }
+    </script>
+</body>
+
+</html>
