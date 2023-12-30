@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ventilador</title>
     <style>
-        body{
+        body {
             font-family: Arial, Helvetica, sans-serif;
         }
+
         button {
-            margin-top: -28px; /* Adiciona um espaçamento acima do botão */
+            margin-top: -800px; /* Adiciona um espaçamento acima do botão */
             background-color: #4046a0;
             color: #fff;
             padding: 10px 15px;
@@ -22,7 +23,7 @@
             margin-left: 10px;
         }
     </style>
-     <script>
+    <script>
         // Adicionar evento de escuta após o carregamento do DOM
         document.addEventListener('DOMContentLoaded', function () {
             // Adicionar evento de escuta para o menu suspenso de avaliação
@@ -31,6 +32,28 @@
                 localStorage.setItem('avaliacaoVentilador', avaliacao);
             });
         });
+
+        function verificarVentilador() {
+            var escolhaUsuario = document.getElementById('escolhaUsuario').value;
+            var resultadoElement = document.getElementById('resultado7');
+
+            if (escolhaUsuario === 'sim') {
+                resultadoElement.innerText = 'O ventilador está funcionando sem ruído.';
+                resultadoElement.style.color = 'green';
+
+                // Habilitar o botão "Próximo"
+                document.getElementById('proximoButton').disabled = false;
+            } else if (escolhaUsuario === 'nao') {
+                resultadoElement.innerText = 'O ventilador está fazendo ruído. Considere fazer uma manutenção.';
+                resultadoElement.style.color = 'red';
+
+                // Habilitar o botão "Próximo"
+                document.getElementById('proximoButton').disabled = false;
+            } else {
+                // Desabilitar o botão "Próximo" se nenhuma opção for escolhida
+                document.getElementById('proximoButton').disabled = true;
+            }
+        }
     </script>
 </head>
 
@@ -41,14 +64,16 @@
     <div class="text">
         <label for="escolhaUsuario"><strong>Está rodando sem ruído?</strong></label>
         <select id="escolhaUsuario">
+            <option value="">Escolha uma opção</option>
             <option value="sim">Sim</option>
             <option value="nao">Não</option>
         </select>
         <button onclick="verificarVentilador()"><strong>Verificar</strong></button>
         <div id="resultado7"></div>
     </div>
+    <br>
     <div class="button2">
-        <button onclick="window.location.href='pag51.html'"><strong>Próximo</strong></button>
+        <button id="proximoButton" onclick="window.location.href='pag51.html'" disabled><strong>Próximo</strong></button>
     </div>
 </body>
 

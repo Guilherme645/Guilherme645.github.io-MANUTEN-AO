@@ -7,7 +7,7 @@
     <title>Fuse Check</title>
     <style>
         body {
-            font-family: Arial, Helvetica, sans-serif
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         h1 {
@@ -18,9 +18,7 @@
 
         .img2 {
             width: 400px;
-            /* Adjust the width as needed */
             height: auto;
-            /* Maintain aspect ratio */
             margin-left: 100px;
             margin-top: -20px;
         }
@@ -34,7 +32,6 @@
             cursor: pointer;
             margin-bottom: 10px;
             font-size: 25px;
-
         }
 
         .button2 {
@@ -75,9 +72,9 @@
         function verificarPlaca() {
             const escolhaUsuario = document.getElementById('escolhaUsuario');
             const resultado = document.getElementById('resultado7');
-    
+
             const input = escolhaUsuario.value.toLowerCase();
-    
+
             if (input === 'não') {
                 resultado.textContent = "Placa visivelmente normal";
                 resultado.classList.remove('vermelho');
@@ -90,13 +87,21 @@
                 resultado.textContent = "Resposta inválida. Por favor, escolha 'Não' ou 'Sim'.";
                 resultado.classList.remove('verde', 'vermelho');
             }
-    
+
             // Armazenar o resultado no localStorage
             localStorage.setItem('resultadoPlaca', resultado.textContent);
-    
-            // Construct the URL with parameters and redirect
-            const avaliacaoVentilador = 'YourAvaliacaoVentiladorResult'; // Replace with your actual result
-            const redirectURL = `pag53.html?resultadoPlaca=${encodeURIComponent(resultado.textContent)}&avaliacaoVentilador=${encodeURIComponent(avaliacaoVentilador)}`;
+
+            // Enable or disable the buttons based on user's choice
+            const simButton = document.getElementById('simButton');
+            const naoButton = document.getElementById('naoButton');
+
+            if (input === 'não' || input === 'sim') {
+                simButton.disabled = false;
+                naoButton.disabled = false;
+            } else {
+                simButton.disabled = true;
+                naoButton.disabled = true;
+            }
         }
     </script>
 </head>
@@ -113,8 +118,8 @@
     <button onclick="verificarPlaca()">Verificar</button>
     <div id="resultado7"></div>
     <div class="button-group">
-        <div><button onclick="window.location.href='pag38.html'"><strong>Sim</strong></button></div>
-        <div><button class="button-container" onclick="window.location.href='pag38.html'"><strong>Não</strong></button></div>
+        <div><button id="simButton" onclick="window.location.href='pag38.html'" disabled><strong>Sim</strong></button></div>
+        <div><button id="naoButton" class="button-container" onclick="window.location.href='pag38.html'" disabled><strong>Não</strong></button></div>
     </div>
 </body>
 

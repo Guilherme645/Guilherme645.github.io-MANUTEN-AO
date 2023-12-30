@@ -9,8 +9,9 @@
     <script>
         function mostrarEscolha() {
             var escolha = document.getElementById("alternativas").value;
-            document.getElementById("resultado").innerHTML = "" + escolha;
+            document.getElementById("resultado").innerHTML = "Modelo escolhido: " + escolha;
         }
+
         function verificarNumero(numeroId, quadradoId) {
             const numero = document.getElementById(numeroId).value;
 
@@ -20,44 +21,6 @@
             }
         }
 
-        function verificarNumeroVoltimetro(inputId, quadradoId, mensagemId) {
-            const inputValue = document.getElementById(inputId).value;
-            const quadrado = document.getElementById(quadradoId);
-            const mensagem = document.getElementById(mensagemId);
-
-            if (parseFloat(inputValue) > 10) {
-                quadrado.style.backgroundColor = 'green';
-                mensagem.textContent = 'Bateria Boa';
-                mensagem.style.color = 'green';
-            } else {
-                quadrado.style.backgroundColor = 'red';
-                mensagem.textContent = 'Bateria com Defeito';
-                mensagem.style.color = 'red';
-            }
-        }
-
-        function getResultText(input) {
-            switch (input) {
-                case '1':
-                    return '1';
-                case '2':
-                    return ' 2';
-                
-            }
-        }
-
-        function setResultStyling(input, resultado) {
-            resultado.classList.toggle('verde', input === '12v5ah' || input === '12v9ah');
-            resultado.classList.toggle('vermelho', input === '12v7ah' || input === '12v18ah');
-        }
-
-        function clearResultStyling(resultado) {
-            resultado.classList.remove('verde', 'vermelho');
-        }
-
-        function getBackgroundColor(numero) {
-            return parseInt(numero) > 50 ? 'green' : 'red';
-        }
         function verificarNumeroVoltimetro(inputId, quadradoId, mensagemId) {
             const inputValue = document.getElementById(inputId).value;
             const quadrado = document.getElementById(quadradoId);
@@ -79,8 +42,52 @@
 
             // Store the result in localStorage
             localStorage.setItem('resultadoBateria', result);
+
+            // Enable the "Próximo" button only if the input is filled
+            const proximoButton = document.getElementById('proximoButton');
+            proximoButton.disabled = inputValue.trim() === '';
         }
-    </script>
+
+        function getResultText(input) {
+            switch (input) {
+                case '1':
+                    return '1';
+                case '2':
+                    return ' 2';
+            }
+        }
+
+        function verificarFusivel(selectId, resultadoId) {
+            var quantidadeBaterias = document.getElementById(selectId).value;
+            localStorage.setItem('quantidadeBaterias', quantidadeBaterias);
+
+            // Display the message below the selection
+            document.getElementById('mensagemQuantidade').innerHTML = '' + quantidadeBaterias + ' bateria(s).';
+
+            // Rest of your existing code...
+
+            // Optionally, you can navigate to the next page after storing the information.
+            // window.location.href = 'pagina2.html';
+        }
+
+        function mostrarEscolha() {
+            var escolha = document.getElementById("alternativas").value;
+            localStorage.setItem('modeloBateria', escolha);
+            document.getElementById("resultado").innerHTML = "Modelo escolhido: " + escolha;
+        }
+
+        function setResultStyling(input, resultado) {
+            resultado.classList.toggle('verde', input === '12v5ah' || input === '12v9ah');
+            resultado.classList.toggle('vermelho', input === '12v7ah' || input === '12v18ah');
+        }
+
+        function clearResultStyling(resultado) {
+            resultado.classList.remove('verde', 'vermelho');
+        }
+
+        function getBackgroundColor(numero) {
+            return parseInt(numero) > 50 ? 'green' : 'red';
+        }
     </script>
 
     <style>
@@ -148,7 +155,6 @@
             border-style: groove;
             border-color: black;
             padding-left: 5px;
-
         }
 
         .p2 {
@@ -158,7 +164,6 @@
             border-style: groove;
             border-color: black;
             padding-left: 10px;
-
         }
 
         .p3 {
@@ -168,7 +173,6 @@
             border-style: groove;
             border-color: black;
             padding-left: 10px;
-
         }
 
         .p4 {
@@ -177,7 +181,6 @@
             border-style: groove;
             border-color: black;
             padding-left: 5px;
-
         }
 
         .p5 {
@@ -187,7 +190,6 @@
             border-style: groove;
             border-color: black;
             padding-left: 20px;
-
         }
 
         .p6 {
@@ -197,7 +199,18 @@
             border-style: groove;
             border-color: black;
             padding-left: 10px;
+        }
 
+        .button2 {
+            margin-top: 50px;
+            color: #fff;
+            padding: 5px 5px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            font-size: 35px;
+            margin-left: 1100px;
         }
     </style>
 </head>
@@ -212,6 +225,7 @@
     </select>
     <button onclick="verificarFusivel('escolhaUsuario1', 'resultado1')">Verificar</button>
     <div id="resultado1"></div>
+    <div id="mensagemQuantidade"></div>
     <h3>(12V5Ah) OU (12V7Ah)</h3>
 
     <h2>Modelos de baterias:</h2>
@@ -223,7 +237,6 @@
             <option value="12v7ah">12v7ah</option>
             <option value="12v9ah">12v9ah</option>
             <option value="12v18ah">12v18ah</option>
-            
         </select>
         <br>
         <p id="resultado"></p>
@@ -248,7 +261,7 @@
     <div id="quadrado" class="quadrado"></div>
     <div id="mensagem" class="mensagem"></div><br><br>
 
-    <div class="button2"><button onclick="window.location.href='pag49.html'"><strong>Próximo</strong></button></div>
+    <div class="button2"><button id="proximoButton" onclick="window.location.href='pag49.html'" disabled><strong>Próximo</strong></button></div>
 </body>
 
 </html>

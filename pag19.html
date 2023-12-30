@@ -12,25 +12,54 @@
     <h3>O ventilador irá sempre fornecer <br> as seguintes informações (numero + "VDC".)</h3>
     <label for="avaliacao"><strong>Está bom?</strong></label>
     <select id="avaliacao">
-        <option value="sim">Substituída</option>
-        <option value="nao">Não foi solicitada a substituição</option>
+        <option value="Escolha uma opção" disabled selected>Escolha uma opção</option>
+        <option value="substituida">Substituída</option>
+        <option value="nao_solicitada">Não foi solicitada a substituição</option>
         <option value="nao_tem">Não tem ventilador</option>
     </select>
+
+    <div class="verificarBtn">
+        <button id="verificarBtn" onclick="verificarOpcao()"><strong>Verificar Opção</strong></button>
+    </div>
+
+    <div id="resultado"></div>
+
     <div class="button">
         <button id="proximoBtn" onclick="nextPage()"><strong>Próximo</strong></button>
     </div>
 
     <script>
         // Adicionar evento de escuta para o menu suspenso de avaliação
-        document.getElementById('avaliacao').addEventListener('change', function() {
+        document.getElementById('avaliacao').addEventListener('change', function () {
             var avaliacao = document.getElementById('avaliacao').value;
             localStorage.setItem('avaliacaoVentilador', avaliacao);
         });
 
+        // Função para verificar a opção do ventilador
+        function verificarOpcao() {
+            var avaliacaoSelecionada = document.getElementById('avaliacao').value;
+            var resultadoDiv = document.getElementById('resultado');
+
+            switch (avaliacaoSelecionada) {
+                case 'substituida':
+                    resultadoDiv.innerText = 'Substituída.';
+                    break;
+                case 'nao_solicitada':
+                    resultadoDiv.innerText = ' Não foi solicitada a substituição.';
+                    break;
+                case 'nao_tem':
+                    resultadoDiv.innerText = ' Não tem ventilador.';
+                    break;
+                default:
+                    resultadoDiv.innerText = 'Por favor, escolha uma opção antes de verificar.';
+                    break;
+            }
+        }
+
         // Função para verificar se uma opção foi selecionada antes de ir para a próxima página
         function nextPage() {
             var avaliacaoSelecionada = document.getElementById('avaliacao').value;
-            if (avaliacaoSelecionada === "") {
+            if (!avaliacaoSelecionada || avaliacaoSelecionada === "Escolha uma opção") {
                 alert("Por favor, escolha uma opção de avaliação antes de prosseguir.");
             } else {
                 // Redirecionar para a próxima página
@@ -38,11 +67,14 @@
             }
         }
     </script>
+
     <style>
-        body{
+        body {
             font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
         }
-        button{
+
+        button {
             margin-top: 50px;
             background-color: #4046a0;
             color: #fff;
@@ -52,7 +84,26 @@
             cursor: pointer;
             margin-bottom: 10px;
             font-size: 25px;
-            margin-left: 1080px;
+            margin-left: auto;
+            display: block;
+            margin-right: 20px;
+        }
+
+        .verificarBtn {
+            margin-top: -75px;
+            margin-right: 740px;
+        }
+        img{
+            margin-left: 20px;
+        }
+        h1{
+            margin-left: 20px;
+        }
+        h2{
+            margin-left: 20px;
+        }
+        h3{
+            margin-left: 20px;
         }
     </style>
 </body>

@@ -153,12 +153,12 @@
     <div class="p5"><p><strong>Anotar o valor (multímetro)</strong></p></div>
     <h2>Rede</h2>
     <strong><label for="numero1">Tensão das baterias (voltímetro):</label></strong>
-    <input type="text" id="numero1" oninput="verificarNumero('numero1', 'quadrado')">
+    <input type="text" id="numero1" oninput="verificarNumero('numero1', 'quadrado', 'mensagem1')">
     <div id="quadrado" class="quadrado"></div>
     <div id="mensagem1"></div><br><br>
 
     <strong><label for="numero2">Tensão da saída (Multímetro):</label></strong>
-    <input type="text" id="numero2" oninput="verificarNumero2('numero2', 'quadrado2')">
+    <input type="text" id="numero2" oninput="verificarNumero2('numero2', 'quadrado2', 'mensagem2')">
     <div id="quadrado2" class="quadrado2"></div>
     <div id="mensagem2"></div><br><br>
     <hr>
@@ -168,15 +168,16 @@
     <div class="p8"><p><strong>Anotar o valor (Multímetro)</strong></p></div>
     <h2>Bateria (carregador)</h2>
     <strong><label for="numero3">Tensão das baterias:</label></strong>
-    <input type="text" id="numero3" oninput="verificarNumero3('numero3', 'quadrado3')">
+    <input type="text" id="numero3" oninput="verificarNumero3('numero3', 'quadrado3', 'mensagem3')">
     <div id="quadrado3" class="quadrado3"></div>
     <div id="mensagem3"></div><br><br>
 
     <strong><label for="numero4">Tensão da saída:</label></strong>
-    <input type="text" id="numero4" oninput="verificarNumero4('numero4', 'quadrado4')">
+    <input type="text" id="numero4" oninput="verificarNumero4('numero4', 'quadrado4', 'mensagem4')">
     <div id="quadrado4" class="quadrado4"></div>
     <div id="mensagem4"></div><br><br>
-    <div class="button"><button onclick="salvarResultados()">Próximo</button></div>
+    <div class="button"><button id="proximoButton" onclick="verificarPreenchimento()">Próximo</button></div>
+
 
     <script>
         function verificarNumero(inputId, quadradoId) {
@@ -254,12 +255,26 @@
                 mensagemElement.style.color = 'green';
             } else {
                 quadradoElement.style.backgroundColor = 'red';
-                mensagemElement.textContent = 'Tensão da saída ruim';
+                mensagemElement.textContent = '*Bateria com defeito,	Danificado possivelmente pelo o tempo de uso ou tensao errada do carregador';
                 mensagemElement.style.color = 'red';
             }
         }
 
+        function verificarPreenchimento() {
+            var numero1 = document.getElementById('numero1').value;
+            var numero2 = document.getElementById('numero2').value;
+            var numero3 = document.getElementById('numero3').value;
+            var numero4 = document.getElementById('numero4').value;
+
+            if (numero1.trim() === '' || numero2.trim() === '' || numero3.trim() === '' || numero4.trim() === '') {
+                alert('Por favor, preencha todos os campos antes de prosseguir.');
+            } else {
+                salvarResultados();
+            }
+        }
+
         function salvarResultados() {
+            // Sua função salvarResultados permanece o mesmo
             var resultadoCarregador = document.getElementById('mensagem1').textContent;
             var resultadoTensaoSaida = document.getElementById('mensagem2').textContent;
             var resultadoBateria = document.getElementById('mensagem3').textContent;
@@ -272,6 +287,7 @@
 
             window.location.href = 'pag48.html';
         }
+    </script>
     </script>
 </body>
 </html>

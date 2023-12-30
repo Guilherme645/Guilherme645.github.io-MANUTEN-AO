@@ -21,13 +21,19 @@
             margin-bottom: 10px;
             font-size: 25px;
         }
+
+        .error-message {
+            color: red;
+            font-size: 18px;
+            margin-top: 5px;
+        }
     </style>
 </head>
 
 <body>
     <img src="Captura_de_tela_2023-11-18_125706-removebg-preview.png" alt="Imagem de exemplo">
 
-    <form id="meuFormulario" onsubmit="salvarDados()">
+    <form id="meuFormulario" onsubmit="return salvarDados()">
         <div>
             <label for="campo1">Técnico responsável:</label>
             <input type="text" id="campo1" name="campo1" required>
@@ -47,7 +53,8 @@
             <label for="campo4">Potência:</label>
             <input type="text" id="campo4" name="campo4" required>
             <strong>Va.</strong><br><br>
-            <button onclick="window.location.href='pag29.html'"><strong>Próximo</strong></button>
+            <div class="error-message" id="errorMessage"></div>
+            <button type="submit"><strong>Próximo</strong></button>
         </div>
     </form>
 
@@ -59,11 +66,25 @@
             var numeroOS = document.getElementById("campo3").value;
             var potencia = document.getElementById("campo4").value;
 
-            // Armazena os valores no localStorage
-            localStorage.setItem("tecnico", tecnico);
-            localStorage.setItem("data", data);
-            localStorage.setItem("numeroOS", numeroOS);
-            localStorage.setItem("potencia", potencia);
+            // Validar se todos os campos estão preenchidos
+            if (tecnico === "" || data === "" || numeroOS === "" || potencia === "") {
+                document.getElementById("errorMessage").innerText = "Por favor, preencha todos os campos antes de prosseguir.";
+                return false; // Impede o envio do formulário se algum campo estiver vazio
+            } else {
+                // Limpa a mensagem de erro se todos os campos estiverem preenchidos
+                document.getElementById("errorMessage").innerText = "";
+                
+                // Armazena os valores no localStorage
+                localStorage.setItem("tecnico", tecnico);
+                localStorage.setItem("data", data);
+                localStorage.setItem("numeroOS", numeroOS);
+                localStorage.setItem("potencia", potencia);
+
+                // Redireciona para a próxima página only if the form is valid
+                window.location.href = 'pag29.html';
+
+                return false; // Impede o envio do formulário, já que estamos redirecionando manualmente
+            }
         }
     </script>
 </body>

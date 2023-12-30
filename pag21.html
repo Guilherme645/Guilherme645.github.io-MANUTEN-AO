@@ -46,6 +46,16 @@
             display: inline-block;
         }
 
+        .mensagem {
+            margin-top: 5px;
+            color: green; /* Adjust the color as needed */
+        }
+
+        .mensagem-erro {
+            margin-top: 5px;
+            color: red; /* Adjust the color as needed */
+        }
+
         button {
             margin-top: 20px;
             background-color: #4046a0;
@@ -162,20 +172,26 @@
             // Check if the value is within the specified ranges
             if ((numericValue >= 12.6 && numericValue <= 15.6) || (numericValue >= 14.6 && numericValue <= 30.6)) {
                 quadrado.style.backgroundColor = "green";
+                exibirMensagem(inputId, "Aprovado");
             } else if (quadradoId === "quadrado3" && (numericValue >= 10 && numericValue <= 15 || numericValue >= 20 && numericValue <= 30)) {
                 quadrado.style.backgroundColor = "green";
+                exibirMensagem(inputId, "Aprovado");
             } else if (quadradoId === "quadrado4" && (numericValue >= 106 && numericValue <= 122 || numericValue >= 210 && numericValue <= 230)) {
                 quadrado.style.backgroundColor = "green";
+                exibirMensagem(inputId, "Aprovado");
             } else {
                 quadrado.style.backgroundColor = "red";
+                exibirMensagemErro(inputId, "Reprovado, falar com o supervisor");
             }
 
             // Additional logic for "Tensão da saída (Multímetro):"
             if (quadradoId === "quadrado2") {
                 if ((numericValue >= 106 && numericValue <= 122) || (numericValue >= 210 && numericValue <= 230)) {
                     quadrado.style.backgroundColor = "green";
+                    exibirMensagem(inputId, "Aprovado");
                 } else {
                     quadrado.style.backgroundColor = "red";
+                    exibirMensagemErro(inputId, "Reprovado, falar com o supervisor");
                 }
             }
         }
@@ -195,6 +211,22 @@
                 alert("Por favor, preencha todos os campos antes de prosseguir.");
             }
         }
+
+        function exibirMensagem(inputId, mensagem) {
+            var mensagemElement = document.getElementById(inputId + "Mensagem");
+            if (mensagemElement) {
+                mensagemElement.innerText = mensagem;
+                mensagemElement.className = "mensagem";
+            }
+        }
+
+        function exibirMensagemErro(inputId, mensagem) {
+            var mensagemElement = document.getElementById(inputId + "Mensagem");
+            if (mensagemElement) {
+                mensagemElement.innerText = mensagem;
+                mensagemElement.className = "mensagem-erro";
+            }
+        }
     </script>
 </head>
 <body>
@@ -211,11 +243,15 @@
     <h2>Rede</h2>
     <strong><label for="newPageTextoInput1">Tensão das baterias (voltímetro):</label></strong>
     <input type="text" id="newPageTextoInput1" name="newPageTextoInput1" oninput="atualizarLocalStorage('newPageTextoInput1')">
-    <div id="quadrado" class="quadrado"></div><br><br>
+    <div id="quadrado" class="quadrado"></div>
+    <div id="newPageTextoInput1Mensagem" class="mensagem"></div>
+    <br><br>
 
     <strong><label for="newPageTextoInput2">Tensão da saída (Multímetro):</label></strong>
     <input type="text" id="newPageTextoInput2" name="newPageTextoInput2" oninput="atualizarLocalStorage('newPageTextoInput2')">
-    <div id="quadrado2" class="quadrado2"></div><br>
+    <div id="quadrado2" class="quadrado2"></div>
+    <div id="newPageTextoInput2Mensagem" class="mensagem"></div>
+    <br>
     <hr>
     <img src="Imagem37.jpg.png" alt="">
     <div class="p6"><p><strong>Tirar do variac</strong></p></div>
@@ -224,11 +260,14 @@
     <h2>Bateria (carregador)</h2>
     <strong><label for="newPageTextoInput3">Tensão das baterias:</label></strong>
     <input type="text" id="newPageTextoInput3" name="newPageTextoInput3" oninput="atualizarLocalStorage('newPageTextoInput3')">
-    <div id="quadrado3" class="quadrado3"></div><br><br>
+    <div id="quadrado3" class="quadrado3"></div>
+    <div id="newPageTextoInput3Mensagem" class="mensagem"></div>
+    <br><br>
 
     <strong><label for="newPageTextoInput4">Tensão da saída:</label></strong>
     <input type="text" id="newPageTextoInput4" name="newPageTextoInput4" oninput="atualizarLocalStorage('newPageTextoInput4')">
     <div id="quadrado4" class="quadrado4"></div>
+    <div id="newPageTextoInput4Mensagem" class="mensagem"></div>
     <div class="button"><button onclick="nextPage()">Próximo</button></div>
     <form>
     </form>

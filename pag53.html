@@ -58,12 +58,28 @@
         <br>
                 <div id="resultadoBateria"></div>
     </div>
+    <div id="displayQuantidade"></div>
+    <div id="displayModelo"></div>
     <div class="button">
         <button onclick="window.location.href='pag280.html'"><strong>Próximo</strong></button>
         <button onclick="copiarTudo()"><strong>Copiar Tudo</strong></button>
     </div>
 
     <script>
+             document.addEventListener('DOMContentLoaded', function () {
+            // Retrieve the stored quantity of batteries and selected battery model
+            var quantidadeBaterias = localStorage.getItem('quantidadeBaterias');
+            var modeloBateria = localStorage.getItem('modeloBateria');
+
+            // Do something with the quantities, e.g., display them
+            if (quantidadeBaterias) {
+                document.getElementById('displayQuantidade').textContent = 'Quantidade de baterias: ' + quantidadeBaterias;
+            }
+
+            if (modeloBateria) {
+                document.getElementById('displayModelo').textContent = 'Modelo de bateria: ' + modeloBateria;
+            }
+        });
         // Retrieve values from localStorage (replace these with actual values)
         var avaliacaoVentilador = localStorage.getItem('avaliacaoVentilador') || 'Não avaliado';
         var resultadoFusivel = localStorage.getItem('resultadoFusivel') || 'Nenhum resultado disponível.';
