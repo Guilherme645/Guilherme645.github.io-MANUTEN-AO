@@ -44,6 +44,32 @@ Message <br>
         })
         .catch();
     }
+    (function () {
+        emailjs.init("your_emailjs_user_id");
+    })();
+    var subjectField = document.querySelector("#subject");
+            subjectField.value = "Cotação de material O.s"; // Preencha automaticamente com o assunto desejado
+    var toEmailField = document.querySelector("#to");
+    toEmailField.value = "pedidodematerial@upsquality.com.br"; // Preencha automaticamente com o endereço desejado
+
+    var params = {
+        sendername: document.querySelector("#sendername").value,
+        to: toEmailField.value,
+        subject: document.querySelector("#subject").value,
+        replyto: document.querySelector("#replyto").value,
+        message: document.querySelector("#message").value,
+    };
+
+    var serviceID = "your_emailjs_service_id";
+    var templateID = "template_oehozsm";
+
+    emailjs.send(serviceID, templateID, params)
+        .then(res => {
+            alert("Email sent successfully");
+        })
+        .catch(error => {
+            console.error("Email failed to send:", error);
+        });
 </script>
 </body>
 </html>

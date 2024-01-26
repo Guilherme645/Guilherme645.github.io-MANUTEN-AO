@@ -35,7 +35,7 @@
 
     <form id="meuFormulario" onsubmit="return salvarDados()">
         <div>
-            <label for="campo1">Técnico responsável:</label>
+            <strong><label for="campo1">Técnico responsável:</label></strong>
             <input type="text" id="campo1" name="campo1" required>
         </div>
 
@@ -50,42 +50,38 @@
         </div>
 
         <div>
-            <label for="campo4">Potência:</label>
-            <input type="text" id="campo4" name="campo4" required>
+            <label for="quantidade">Potencia:</label>
+    <input type="number" id="quantidade" name="quantidade" required><br>
             <strong>Va.</strong><br><br>
             <div class="error-message" id="errorMessage"></div>
-            <button type="submit"><strong>Próximo</strong></button>
+            <button onclick="saveAndRedirect()"><strong>Próximo</strong></button>
         </div>
     </form>
 
     <script>
         function salvarDados() {
-            // Obtém os valores dos campos
-            var tecnico = document.getElementById("campo1").value;
-            var data = document.getElementById("campo2").value;
-            var numeroOS = document.getElementById("campo3").value;
-            var potencia = document.getElementById("campo4").value;
+        var tecnico = document.getElementById("campo1").value;
+        var data = document.getElementById("campo2").value;
+        var numeroOS = document.getElementById("campo3").value;
+        var quantidade = document.getElementById("quantidade").value;
 
-            // Validar se todos os campos estão preenchidos
-            if (tecnico === "" || data === "" || numeroOS === "" || potencia === "") {
-                document.getElementById("errorMessage").innerText = "Por favor, preencha todos os campos antes de prosseguir.";
-                return false; // Impede o envio do formulário se algum campo estiver vazio
-            } else {
-                // Limpa a mensagem de erro se todos os campos estiverem preenchidos
-                document.getElementById("errorMessage").innerText = "";
-                
-                // Armazena os valores no localStorage
-                localStorage.setItem("tecnico", tecnico);
-                localStorage.setItem("data", data);
-                localStorage.setItem("numeroOS", numeroOS);
-                localStorage.setItem("potencia", potencia);
+        if (tecnico === "" || data === "" || numeroOS === "" || quantidade === "") {
+            document.getElementById("errorMessage").innerText = "Por favor, preencha todos os campos antes de prosseguir.";
+        } else {
+            document.getElementById("errorMessage").innerText = "";
 
-                // Redireciona para a próxima página only if the form is valid
-                window.location.href = 'pag29.html';
+            localStorage.setItem("tecnico", tecnico);
+            localStorage.setItem("data", data);
+            localStorage.setItem("numeroOS", numeroOS);
+            localStorage.setItem("quantidade", quantidade);
 
-                return false; // Impede o envio do formulário, já que estamos redirecionando manualmente
-            }
+            // Pass the "quantidade" value as a query parameter to the next page
+            window.location.href = 'pag29.html?quantidade=' + quantidade;
         }
+
+        // Prevent default form submission behavior
+        event.preventDefault();
+    }
     </script>
 </body>
 

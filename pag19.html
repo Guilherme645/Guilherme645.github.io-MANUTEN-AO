@@ -6,10 +6,10 @@
     <title>Página do Ventilador</title>
 </head>
 <body>
-    <h1>Informações do Ventilador</h1>
-    <h2>Avaliação do Ventilador</h2>
+    <h1>Avaliação do Ventilador</h1>
     <img src="Imagem18.jpg" alt="">
     <h3>O ventilador irá sempre fornecer <br> as seguintes informações (numero + "VDC".)</h3>
+
     <label for="avaliacao"><strong>Está bom?</strong></label>
     <select id="avaliacao">
         <option value="Escolha uma opção" disabled selected>Escolha uma opção</option>
@@ -29,13 +29,11 @@
     </div>
 
     <script>
-        // Adicionar evento de escuta para o menu suspenso de avaliação
         document.getElementById('avaliacao').addEventListener('change', function () {
             var avaliacao = document.getElementById('avaliacao').value;
             localStorage.setItem('avaliacaoVentilador', avaliacao);
         });
 
-        // Função para verificar a opção do ventilador
         function verificarOpcao() {
             var avaliacaoSelecionada = document.getElementById('avaliacao').value;
             var resultadoDiv = document.getElementById('resultado');
@@ -45,10 +43,10 @@
                     resultadoDiv.innerText = 'Substituída.';
                     break;
                 case 'nao_solicitada':
-                    resultadoDiv.innerText = ' Não foi solicitada a substituição.';
+                    resultadoDiv.innerText = 'Não foi solicitada a substituição.';
                     break;
                 case 'nao_tem':
-                    resultadoDiv.innerText = ' Não tem ventilador.';
+                    resultadoDiv.innerText = 'Não tem ventilador.';
                     break;
                 default:
                     resultadoDiv.innerText = 'Por favor, escolha uma opção antes de verificar.';
@@ -56,14 +54,17 @@
             }
         }
 
-        // Função para verificar se uma opção foi selecionada antes de ir para a próxima página
         function nextPage() {
             var avaliacaoSelecionada = document.getElementById('avaliacao').value;
+
             if (!avaliacaoSelecionada || avaliacaoSelecionada === "Escolha uma opção") {
                 alert("Por favor, escolha uma opção de avaliação antes de prosseguir.");
             } else {
+                // Armazenar a escolha no localStorage
+                localStorage.setItem('avaliacaoVentilador', avaliacaoSelecionada);
+
                 // Redirecionar para a próxima página
-                window.location.href = 'pag11.html';
+                window.location.href = 'pag26.html';
             }
         }
     </script>
@@ -86,23 +87,27 @@
             font-size: 25px;
             margin-left: auto;
             display: block;
-            margin-right: 20px;
+            margin-left: 300px;
         }
 
         .verificarBtn {
             margin-top: -75px;
             margin-right: 740px;
         }
-        img{
+
+        img {
             margin-left: 20px;
         }
-        h1{
+
+        h1 {
             margin-left: 20px;
         }
-        h2{
+
+        h2 {
             margin-left: 20px;
         }
-        h3{
+
+        h3 {
             margin-left: 20px;
         }
     </style>

@@ -7,52 +7,74 @@
     <h1>Send Email</h1>
 
     <strong>Nome do remetente</strong>
+    <input type="text" id="sendername"> <br>
 
-<strong><input type="text" id="sendername"> <br> Para email</strong>
+    <strong>Para email</strong>
+    <input type="text" id="to"> <br>
 
-<input type="text" id="to"> <br>
+    <strong>Assunto</strong>
+    <input type="text" id="subject"> <br>
 
-<strong>Assunto</strong>
+    <strong>Responder para (e-mail)</strong> 
+    <input type="text" id="replyto"> <br>
 
-<input type="text" id="subject"> <br><strong>Responder para (e-mail)</strong> 
+    <strong>Mensagem</strong><br>
+    <textarea id="message" cols="40" rows="8"></textarea> <br>
 
-<input type="text" id="replyto"> <br>
+    <button onclick="sendMail();"><strong>Enviar</strong></button>
+    <button onclick="pasteFromClipboard()"><strong>Colar</strong></button>
+    <button class="button-container" onclick="window.location.href='pag01.html'"><strong>Inicio</strong></button>   
 
-<strong>Mensagem </strong><br>
-
-<textarea id="menssage" cols="40" rows="8"></textarea> <br>
-
-<button onclick = "sendMail();">Send</button>
-<button class="button-container" onclick="window.location.href='pag01.html'"><strong>inicio</strong></button>   
-
-<script>
-    function sendMail(){
-        (function(){
+    <script>
+        function sendMail() {
             emailjs.init("yU591Iq_1nb03hSKA");
-        })();
-        var params = {
-            sendername: document.querySelector("#sendername").value,
-            to: document.querySelector("#to"). value,
-            subject: document.querySelector("#subject"). value,
-            replyto: document.querySelector("#replyto"). value,
-            message: document.querySelector("#menssage"). value,
 
-        };
-        var serviceID = "service_2bknod5";
-        var tamplateID = "template_oehozsm";
-        emailjs.send(serviceID, tamplateID, params )
-        .then( res => {
-            alert("email sent sucefully");
-        })
-        .catch();
-    }
-</script>
-<style>
-body{
-    font-family: Arial, Helvetica, sans-serif;
-}
-button{
-      margin-top: 0px; /* Adiciona um espaçamento acima do botão */
+            var params = {
+                sendername: document.querySelector("#sendername").value,
+                to: document.querySelector("#to").value,
+                subject: document.querySelector("#subject").value,
+                replyto: document.querySelector("#replyto").value,
+                message: document.querySelector("#message").value,
+            };
+
+            var serviceID = "service_2bknod5";
+            var templateID = "template_oehozsm";
+
+            emailjs.send(serviceID, templateID, params)
+                .then(res => {
+                    alert("Email sent successfully");
+                })
+                .catch(error => {
+                    console.error("Email failed to send:", error);
+                });
+        }
+
+        // Pre-fill subject and to email fields
+        document.addEventListener('DOMContentLoaded', function() {
+            var subjectField = document.querySelector("#subject");
+            subjectField.value = "Cotação de material O.s";
+
+            var toEmailField = document.querySelector("#to");
+            toEmailField.value = "pedidodematerial@upsquality.com.br";
+        });
+
+        function pasteFromClipboard() {
+            navigator.clipboard.readText().then(clipboardText => {
+                // Paste the clipboard text into the message textarea
+                document.getElementById("message").value = clipboardText;
+            }).catch(err => {
+                console.error('Failed to read clipboard contents: ', err);
+            });
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        button {
+            margin-top: 0px;
             background-color: #4046a0;
             color: #fff;
             padding: 10px 15px;
@@ -61,7 +83,7 @@ button{
             cursor: pointer;
             margin-bottom: 10px;
             font-size: 25px;
-    }
-</style>
+        }
+    </style>
 </body>
 </html>

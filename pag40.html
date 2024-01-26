@@ -68,13 +68,16 @@
             color: red;
         }
     </style>
-    <script>
+     <script>
         function verificarPlaca() {
+            // Obter elementos do DOM
             const escolhaUsuario = document.getElementById('escolhaUsuario');
             const resultado = document.getElementById('resultado7');
 
+            // Obter valor do input
             const input = escolhaUsuario.value.toLowerCase();
 
+            // Lógica de verificação da placa
             if (input === 'não') {
                 resultado.textContent = "Placa visivelmente normal";
                 resultado.classList.remove('vermelho');
@@ -90,25 +93,18 @@
 
             // Armazenar o resultado no localStorage
             localStorage.setItem('resultadoPlaca', resultado.textContent);
+            
+            // Armazenar a escolha do usuário na localStorage
+            localStorage.setItem('escolhaUsuario', input);
 
-            // Enable or disable the buttons based on user's choice
-            const simButton = document.getElementById('simButton');
-            const naoButton = document.getElementById('naoButton');
-
-            if (input === 'não' || input === 'sim') {
-                simButton.disabled = false;
-                naoButton.disabled = false;
-            } else {
-                simButton.disabled = true;
-                naoButton.disabled = true;
-            }
+            // Redirecionar para outra página
+            window.location.href = 'pag38.html';
         }
     </script>
 </head>
 
 <body>
-    <h1>PLACA</h1>
-    <h2>A placa está visivelmente queimada?</h2>
+    <h1>PLACA</h1><br>
     <div class="img2"><img src="imagem29.png.jpg" alt="Image Description"></div>
     <label for="escolhaUsuario"><strong>A placa está visivelmente queimada?</strong></label>
     <select id="escolhaUsuario">
@@ -118,8 +114,7 @@
     <button onclick="verificarPlaca()">Verificar</button>
     <div id="resultado7"></div>
     <div class="button-group">
-        <div><button id="simButton" onclick="window.location.href='pag38.html'" disabled><strong>Sim</strong></button></div>
-        <div><button id="naoButton" class="button-container" onclick="window.location.href='pag38.html'" disabled><strong>Não</strong></button></div>
+        
     </div>
 </body>
 

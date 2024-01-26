@@ -11,7 +11,7 @@
         }
 
         button {
-            margin-top: -800px; /* Adiciona um espaçamento acima do botão */
+            margin-top: -800px;
             background-color: #4046a0;
             color: #fff;
             padding: 10px 15px;
@@ -24,34 +24,18 @@
         }
     </style>
     <script>
-        // Adicionar evento de escuta após o carregamento do DOM
-        document.addEventListener('DOMContentLoaded', function () {
-            // Adicionar evento de escuta para o menu suspenso de avaliação
-            document.getElementById('avaliacao').addEventListener('change', function () {
-                var avaliacao = document.getElementById('avaliacao').value;
-                localStorage.setItem('avaliacaoVentilador', avaliacao);
-            });
-        });
-
+        
         function verificarVentilador() {
             var escolhaUsuario = document.getElementById('escolhaUsuario').value;
-            var resultadoElement = document.getElementById('resultado7');
 
-            if (escolhaUsuario === 'sim') {
-                resultadoElement.innerText = 'O ventilador está funcionando sem ruído.';
-                resultadoElement.style.color = 'green';
+            if (escolhaUsuario) {
+                // Store the selected value in local storage
+                localStorage.setItem('avaliacaoVentilador', escolhaUsuario);
 
-                // Habilitar o botão "Próximo"
-                document.getElementById('proximoButton').disabled = false;
-            } else if (escolhaUsuario === 'nao') {
-                resultadoElement.innerText = 'O ventilador está fazendo ruído. Considere fazer uma manutenção.';
-                resultadoElement.style.color = 'red';
-
-                // Habilitar o botão "Próximo"
-                document.getElementById('proximoButton').disabled = false;
+                // Redirect to the next page
+                window.location.href = 'pag49 copy.html';
             } else {
-                // Desabilitar o botão "Próximo" se nenhuma opção for escolhida
-                document.getElementById('proximoButton').disabled = true;
+                alert('Por favor, escolha uma opção antes de prosseguir.');
             }
         }
     </script>
@@ -65,15 +49,21 @@
         <label for="escolhaUsuario"><strong>Está rodando sem ruído?</strong></label>
         <select id="escolhaUsuario">
             <option value="">Escolha uma opção</option>
-            <option value="sim">Sim</option>
-            <option value="nao">Não</option>
+            <option value="ventilador sem ruído">Sim</option>
+            <option value="ventilador com ruido">Não</option>
+            <option value="não contém ventilador">Não tem ventilador</option>
         </select>
         <button onclick="verificarVentilador()"><strong>Verificar</strong></button>
         <div id="resultado7"></div>
     </div>
     <br>
+    <button onclick="window.location.href='pag53 copy.html'"><strong>Sim</strong></button>
+    <button onclick="window.location.href='pag49 copy.html'"><strong>Não</strong></button>
+    <br>
+
+    <br>
     <div class="button2">
-        <button id="proximoButton" onclick="window.location.href='pag51.html'" disabled><strong>Próximo</strong></button>
+        <button onclick="verificarVentilador()"><strong>Próximo</strong></button>
     </div>
 </body>
 

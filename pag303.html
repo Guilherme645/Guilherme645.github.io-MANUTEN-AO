@@ -14,31 +14,34 @@
             width: 120px;
         }
 
-        .p1 {}
+        .p1 {
+            margin-left: 150px;
+            margin-top: -150px;
+        }
 
         .p2 {
             margin-left: 150px;
-            margin-top: -203px;
+            margin-top: -400px;
         }
 
         .p3 {
             margin-left: 300px;
-            margin-top: -203px;
+            margin-top: -208px;
         }
 
         .p4 {
             margin-left: 450px;
-            margin-top: -203px;
+            margin-top: -208px;
         }
 
         .p5 {
             margin-left: 600px;
-            margin-top: -110px;
+            margin-top: -119px;
         }
 
         .p6 {
             margin-left: 750px;
-            margin-top: -187px;
+            margin-top: -193px;
         }
 
         .p7 {
@@ -48,7 +51,7 @@
 
         .p8 {
             margin-left: 1090px;
-            margin-top: -30px;
+            margin-top: -50px;
         }
 
         button {
@@ -59,21 +62,30 @@
             border-radius: 15px;
             cursor: pointer;
             margin-bottom: 10px;
-            font-size: 15px;
+            font-size: 20px;
+          
+        }
+        input[type="checkbox"] {
+           width: 40px;
+           height: 20px;
+           margin-right: 150px;
+        }
+        .button{
+            margin-top: 150px;
         }
     </style>
 </head>
 
 <body>
     <img src="Captura_de_tela_2023-11-18_125706-removebg-preview.png" alt=""><br>
-    <button type="button" onclick="openPage('pag08.html')"><strong>placa</strong></button>
+    <button type="button" onclick="openPage('pag08.html')"><strong>Placa</strong></button>
     <p></p>
-    <button type="button" onclick="openPage('pag09.html')"><strong>trafo</strong></button>
+    <button type="button" onclick="openPage('pag09.html')"><strong>Trafo</strong></button>
     <p></p>
-    <button type="button" onclick="openPage('pag06.html')"><strong>bateria</strong></button>
+    <button type="button" onclick="openPage('pag06.html')"><strong>Bateria</strong></button>
     <p></p>
-    <button type="button" onclick="openPage('pag07.html')"><strong>botão</strong></button> <br><br>
-    <button type="button" onclick="openPage('pag07.html')"><strong>mal contato</strong></button> <br><br>
+    <button type="button" onclick="openPage('pag07.html')"><strong>Botão</strong></button> <br><br>
+    <button type="button" onclick="openPage('pag07.html')"><strong>Mal contato</strong></button> <br><br>
 
     <div class="p1">
         <label for="marcarCheckbox1"><strong>Placa:</strong></label>
@@ -121,17 +133,21 @@
         <input type="checkbox" id="marcarCheckbox8" onchange="marcaClique(8)"><br>
         <img src="WhatsApp Image 2023-12-26 at 15.31.01 (1).jpeg" alt="">
     </div>
-    <button class="button-container" onclick="window.location.href='pag304.html'" disabled><strong>Próximo</strong></button>
+    <div class="button"><button class="button-container" onclick="window.location.href='pag304.html'"><strong>Próximo</strong></button></div>
 
 </body>
 
 <script>
     function marcaClique(numero) {
         var checkbox = document.getElementById("marcarCheckbox" + numero);
+        var caixaPreenchimento = document.getElementById("caixaPreenchimento" + numero);
+
         if (checkbox.checked) {
             // Adicione aqui o código que deseja executar quando o botão for marcado
+            caixaPreenchimento.value = "Preenchido"; // Exemplo: preenche a caixa com o texto "Preenchido"
         } else {
             // Adicione aqui o código que deseja executar quando o botão for desmarcado
+            caixaPreenchimento.value = ""; // Limpa o conteúdo da caixa quando desmarcado
         }
 
         // Verificar se todas as opções foram escolhidas para habilitar/desabilitar o botão "Próximo"
@@ -141,6 +157,19 @@
         var todasSelecionadas = Array.from(checkboxes).every(checkbox => checkbox.checked);
         proximoButton.disabled = !todasSelecionadas;
     }
+
+    // Adiciona um listener de evento para cada imagem
+    var imagens = document.querySelectorAll('img');
+    imagens.forEach(function (imagem, index) {
+        imagem.addEventListener('click', function () {
+            var checkbox = document.getElementById("marcarCheckbox" + (index + 1));
+            checkbox.checked = !checkbox.checked; // Inverte o estado do checkbox ao clicar na imagem
+            marcaClique(index + 1); // Chama a função marcaClique para atualizar o botão "Próximo"
+        });
+    });
+    function openPage(page) {
+            // Adicione aqui o redirecionamento para a página especificada
+            window.location.href = page;
+        }
 </script>
 
-</html>

@@ -36,7 +36,10 @@
     <img src="Imagem40.jpg.png" alt="">
     
     <p>Clicar em cotar material e entregar (o equipamento e O.s) no almoxarifado.</p>
-    <button class="button-container" onclick="window.location.href='pag56.html'"><strong>pedir material</strong></button>
+    <button onclick="abrirEmail()">Cotação de Material</button>
+    <button class="button-container" onclick="window.location.href='pag01.html'"><strong>Inicio</strong></button>   
+
+
 
     <div class="bloco">
         <div id="conteudo" style="border: 5px solid #000; padding: 10px; ">
@@ -60,12 +63,27 @@
                 <label for="Placa">Placa:</label>
                 <input type="text" id="Placa" name="Placa" required><br>
 
-                <button onclick="copiarTexto()">Copiar Texto</button>
+                <button onclick="copiarTexto()"><strong>Copiar Texto</strong></button>
             </form>
         </div>
     </div>
 
     <script>
+         function abrirEmail() {
+      // Substitua 'endereco@email.com' pelo endereço de e-mail desejado
+      var enderecoEmail = 'upsqualitybsb@gmail.com';
+
+      // Substitua 'Assunto do E-mail' pelo assunto desejado
+      var assuntoEmail = 'Cotação de Material';
+
+      // Substitua 'Corpo do E-mail' pelo corpo desejado
+      var corpoEmail = '';
+
+      var linkEmail = 'mailto:' + enderecoEmail + '?subject=' + encodeURIComponent(assuntoEmail) + '&body=' + encodeURIComponent(corpoEmail);
+
+      // Abrir o cliente de e-mail padrão do usuário
+      window.location.href = linkEmail;
+    }
         function copiarTexto() {
             // Obter os valores dos campos de entrada
             var numeroOs = document.getElementById("NumeroOs").value;

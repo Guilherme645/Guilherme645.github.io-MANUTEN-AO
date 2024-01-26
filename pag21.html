@@ -66,7 +66,7 @@
             cursor: pointer;
             margin-bottom: 10px;
             font-size: 20px;
-            margin-left: 1100px;
+            margin-left: 10px;
         }
 
         h2 {
@@ -142,12 +142,11 @@
             border-color: black;
         }
     </style>
-    <script>
+       <script>
         function atualizarLocalStorage(inputId) {
             var texto = document.getElementById(inputId).value;
             localStorage.setItem(inputId, texto);
 
-            // Determine the square ID based on the input field
             var quadradoId;
             switch (inputId) {
                 case "newPageTextoInput1":
@@ -169,7 +168,6 @@
             var quadrado = document.getElementById(quadradoId);
             var numericValue = parseFloat(texto);
 
-            // Check if the value is within the specified ranges
             if ((numericValue >= 12.6 && numericValue <= 15.6) || (numericValue >= 14.6 && numericValue <= 30.6)) {
                 quadrado.style.backgroundColor = "green";
                 exibirMensagem(inputId, "Aprovado");
@@ -184,7 +182,6 @@
                 exibirMensagemErro(inputId, "Reprovado, falar com o supervisor");
             }
 
-            // Additional logic for "Tensão da saída (Multímetro):"
             if (quadradoId === "quadrado2") {
                 if ((numericValue >= 106 && numericValue <= 122) || (numericValue >= 210 && numericValue <= 230)) {
                     quadrado.style.backgroundColor = "green";
@@ -194,19 +191,21 @@
                     exibirMensagemErro(inputId, "Reprovado, falar com o supervisor");
                 }
             }
+
+            // Salvar mensagens no localStorage
+            saveMessagesInLocalStorage();
         }
 
         function abrirPagina3() {
-            window.location.href = "nextPage.html";
+            window.location.href = "pag22.html";
         }
 
         function nextPage() {
-            // Check if all input fields are filled
             var inputs = document.querySelectorAll('input[type="text"]');
             var allFieldsFilled = Array.from(inputs).every(input => input.value.trim() !== '');
 
             if (allFieldsFilled) {
-                window.location.href = "pag22.html";
+                window.location.href = "pag22.html"; // Mudança: agora redireciona para outra página
             } else {
                 alert("Por favor, preencha todos os campos antes de prosseguir.");
             }
@@ -227,49 +226,61 @@
                 mensagemElement.className = "mensagem-erro";
             }
         }
+
+        function saveMessagesInLocalStorage() {
+            for (let i = 1; i <= 4; i++) {
+                const inputId = "newPageTextoInput" + i;
+                const mensagem = document.getElementById(inputId + "Mensagem").innerText;
+                localStorage.setItem(inputId + "Mensagem", mensagem);
+            }
+        }
     </script>
+
 </head>
 <body>
-    <img src="Captura_de_tela_2023-11-18_125706-removebg-preview.png" alt="">
-    <h1>Teste No-brak</h1>
-    <div class="img2"><img src="Imagem35.png" alt=""></div>
-    <div class="p1"><p><strong>Ligue o Nobreak no variac</strong></p></div>
-    <div class="p2"><p><strong>Ligue voltímetro junto com o módulo de bateria</strong></p></div>
-    <div class="p3"><p><strong>Anotar o valor (Voltímetro)</strong></p></div>
-    <hr>
-    <img src="Imagem36.jpg.png" alt="">
-    <div class="p4"><p><strong>Ligar a carga no No-break</strong></p></div>
-    <div class="p5"><p><strong>Anotar o valor (multímetro)</strong></p></div>
-    <h2>Rede</h2>
-    <strong><label for="newPageTextoInput1">Tensão das baterias (voltímetro):</label></strong>
-    <input type="text" id="newPageTextoInput1" name="newPageTextoInput1" oninput="atualizarLocalStorage('newPageTextoInput1')">
-    <div id="quadrado" class="quadrado"></div>
-    <div id="newPageTextoInput1Mensagem" class="mensagem"></div>
-    <br><br>
-
-    <strong><label for="newPageTextoInput2">Tensão da saída (Multímetro):</label></strong>
-    <input type="text" id="newPageTextoInput2" name="newPageTextoInput2" oninput="atualizarLocalStorage('newPageTextoInput2')">
-    <div id="quadrado2" class="quadrado2"></div>
-    <div id="newPageTextoInput2Mensagem" class="mensagem"></div>
-    <br>
-    <hr>
-    <img src="Imagem37.jpg.png" alt="">
-    <div class="p6"><p><strong>Tirar do variac</strong></p></div>
-    <div class="p7"><p><strong>Anotar o valor (Voltímetro)</strong></p></div>
-    <div class="p8"><p><strong>Anotar o valor (Multímetro)</strong></p></div>
-    <h2>Bateria (carregador)</h2>
-    <strong><label for="newPageTextoInput3">Tensão das baterias:</label></strong>
-    <input type="text" id="newPageTextoInput3" name="newPageTextoInput3" oninput="atualizarLocalStorage('newPageTextoInput3')">
-    <div id="quadrado3" class="quadrado3"></div>
-    <div id="newPageTextoInput3Mensagem" class="mensagem"></div>
-    <br><br>
-
-    <strong><label for="newPageTextoInput4">Tensão da saída:</label></strong>
-    <input type="text" id="newPageTextoInput4" name="newPageTextoInput4" oninput="atualizarLocalStorage('newPageTextoInput4')">
-    <div id="quadrado4" class="quadrado4"></div>
-    <div id="newPageTextoInput4Mensagem" class="mensagem"></div>
-    <div class="button"><button onclick="nextPage()">Próximo</button></div>
-    <form>
-    </form>
+    <body>
+        <img src="Captura_de_tela_2023-11-18_125706-removebg-preview.png" alt="">
+        <h1>Teste No-brak</h1>
+        <div class="img2"><img src="Imagem35.png" alt=""></div>
+        <div class="p1"><p><strong>Ligue o Nobreak no variac</strong></p></div>
+        <div class="p2"><p><strong>Ligue voltímetro junto com o módulo de bateria</strong></p></div>
+        <div class="p3"><p><strong>Anotar o valor (Voltímetro)</strong></p></div>
+        <hr>
+        <img src="Imagem36.jpg.png" alt="">
+        <div class="p4"><p><strong>Ligar a carga no No-break</strong></p></div>
+        <div class="p5"><p><strong>Anotar o valor (multímetro)</strong></p></div>
+        <h2>Rede</h2>
+        <strong><label for="newPageTextoInput1">Tensão das baterias (voltímetro):</label></strong>
+        <input type="text" id="newPageTextoInput1" name="newPageTextoInput1" oninput="atualizarLocalStorage('newPageTextoInput1')">
+        <div id="quadrado" class="quadrado"></div>
+        <div id="newPageTextoInput1Mensagem" class="mensagem"></div>
+        <br><br>
+    
+        <strong><label for="newPageTextoInput2">Tensão da saída (Multímetro):</label></strong>
+        <input type="text" id="newPageTextoInput2" name="newPageTextoInput2" oninput="atualizarLocalStorage('newPageTextoInput2')">
+        <div id="quadrado2" class="quadrado2"></div>
+        <div id="newPageTextoInput2Mensagem" class="mensagem"></div>
+        <br>
+        <hr>
+        <img src="Imagem37.jpg.png" alt="">
+        <div class="p6"><p><strong>Tirar do variac</strong></p></div>
+        <div class="p7"><p><strong>Anotar o valor (Voltímetro)</strong></p></div>
+        <div class="p8"><p><strong>Anotar o valor (Multímetro)</strong></p></div>
+        <h2>Bateria</h2>
+        <strong><label for="newPageTextoInput3">Tensão das baterias:</label></strong>
+        <input type="text" id="newPageTextoInput3" name="newPageTextoInput3" oninput="atualizarLocalStorage('newPageTextoInput3')">
+        <div id="quadrado3" class="quadrado3"></div>
+        <div id="newPageTextoInput3Mensagem" class="mensagem"></div>
+        <br><br>
+    
+        <strong><label for="newPageTextoInput4">Tensão da saída:</label></strong>
+        <input type="text" id="newPageTextoInput4" name="newPageTextoInput4" oninput="atualizarLocalStorage('newPageTextoInput4')">
+        <div id="quadrado4" class="quadrado4"></div>
+        <div id="newPageTextoInput4Mensagem" class="mensagem"></div>
+        <div class="button"><button onclick="nextPage()">Próximo</button></div>
+        <form>
+        </form>
+    </html>
+    <div>
 </body>
 </html>

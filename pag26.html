@@ -6,12 +6,25 @@
     <title>Página 3</title>
    
     <script>
+           document.addEventListener("DOMContentLoaded", function() {
+            // Recuperar os valores do localStorage
+            var valorInput1 = localStorage.getItem("newPageTextoInput1");
+            var valorInput2 = localStorage.getItem("newPageTextoInput2");
+            var valorInput3 = localStorage.getItem("newPageTextoInput3");
+            var valorInput4 = localStorage.getItem("newPageTextoInput4");
+
+            // Exibir os valores na página
+            document.getElementById("resultadoInput1").innerText = "Valor do carregador: " + valorInput1;
+            document.getElementById("resultadoInput2").innerText = "Valor da tensão de saída: " + valorInput2;
+            document.getElementById("resultadoInput3").innerText = "Valor da bateria: " + valorInput3;
+            document.getElementById("resultadoInput4").innerText = "Valor da tensão de saída: " + valorInput4;
+        });
         // Retrieve values from localStorage for index.html
         var indexTextoInput1 = localStorage.getItem('indexTextoInput1');
         var indexTextoInput2 = localStorage.getItem('indexTextoInput2');
         var indexTextoInput3 = localStorage.getItem('indexTextoInput3');
         var indexTextoInput4 = localStorage.getItem('indexTextoInput4');
-
+        
         // Retrieve values from localStorage for newPage.html
         var newPageTextoInput1 = localStorage.getItem('newPageTextoInput1');
         var newPageTextoInput2 = localStorage.getItem('newPageTextoInput2');
@@ -19,7 +32,12 @@
         var newPageTextoInput4 = localStorage.getItem('newPageTextoInput4');
 
         // Retrieve value from localStorage for ventilador.html
+        var resultadoProximaPaginaDiv = document.getElementById('resultadoProximaPagina');
+
         var avaliacaoVentilador = localStorage.getItem('avaliacaoVentilador');
+
+// Exibir informações na página
+document.getElementById('avaliacaoInfo').innerText = 'Avaliação do Ventilador: ' + avaliacaoVentilador;
 
         // Display stored values on the page
         document.addEventListener('DOMContentLoaded', function () {
@@ -31,12 +49,73 @@
             document.getElementById('newPageTextoInput2').innerText = newPageTextoInput2;
             document.getElementById('newPageTextoInput3').innerText = newPageTextoInput3;
             document.getElementById('newPageTextoInput4').innerText = newPageTextoInput4;
-            document.getElementById('avaliacaoVentilador').innerText = avaliacaoVentilador;
+        });
+ // Retrieve values from local storage and display them
+ document.addEventListener("DOMContentLoaded", function() {
+            for (let i = 1; i <= 4; i++) {
+                const inputId = "newPageTextoInput" + i;
+                const mensagem = localStorage.getItem(inputId + "Mensagem");
+                const resultadoElement = document.getElementById("resultado" + i);
+
+                if (mensagem) {
+                    resultadoElement.innerText = mensagem;
+                    resultadoElement.className = mensagem.includes("Aprovado") ? "mensagem" : "mensagem-erro";
+                } else {
+                    resultadoElement.innerText = "Sem resultado";
+                }
+            }
         });
         function imprimirPagina() {
-      window.print();
-     }
+            window.print();
+        }
     </script>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        img {
+            width: 80px;
+            margin-left: 180px;
+            margin-top: -50px;
+        }
+
+
+        button {
+            margin-top: 10px;
+            background-color: #4046a0;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2c327a;
+        }
+
+
+
+        /* Additional styles for printing */
+        @media print {
+            body {
+                background-color: #fff;
+            }
+
+            button {
+                display: none; /* Hide buttons when printing */
+            }
+        }
+    </style>
 </head>
 <body>
     <div>
@@ -49,116 +128,44 @@
         <br>
         <img src="Imagem4.png" alt="">
         <br>
-        <div class="bloco"><strong><label for="indexTextoInput3">Potencia:</label></strong>
-        <span id="indexTextoInput3"></span>
-        <br>
-        <label for="indexTextoInput4"><strong>Técnico responsável:</strong></label>
-        <span id="indexTextoInput4"></span>
-    </div>
-
-    <div>
-        <strong><p>Rede</p></strong>
-        <label for="newPageTextoInput1"><strong>Tensão das baterias (voltímetro):</strong></label>
-        <span id="newPageTextoInput1"></span>
-        <br>
-        <label for="newPageTextoInput2"><strong>Tensão da saída (Multímetro):</strong></label>
-        <span id="newPageTextoInput2"></span>
-        <br>
-        <strong><p>Bateria</p></strong>
-        <label for="newPageTextoInput3"><strong>Tensão das baterias:</strong></label>
-        <span id="newPageTextoInput3"></span>
-        <br>
-        <label for="newPageTextoInput4"><strong>Tensão da saída:</strong></label>
-        <span id="newPageTextoInput4"></span>
-    </div>
-
-    <div>
-        <h2>Avaliação do Ventilador</h2>
-        <label for="avaliacaoVentilador"><strong>Avaliação do Ventilador:</strong></label>
-        <span id="avaliacaoVentilador"></span>
-        <button onclick="window.location.href='pag27.html'">Proximo</button>
-        <button onclick="imprimirPagina()">Imprimir Página</button>
-
-    </div></div>
-</body> 
-<style>
-     body {
-        font-family: 'Arial', sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-
+        <div class="bloco">
+            <strong><label for="indexTextoInput3">Potencia:</label></strong>
+            <span id="indexTextoInput3"></span>
+            <br>
+            <label for="indexTextoInput4"><strong>Técnico responsável:</strong></label>
+            <span id="indexTextoInput4"></span>
+        </div>
+       
         
-    }
-
-    .container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-top: 20px;
-        margin-left: 20px;
-        margin-right: 0px;
-        border-style: groove;
-        margin-right: 200px;
-
-    }
-
-    img {
-        width: 80px;
-        margin-left: 180px;
-        margin-top: -50px;
-    }
-
-    h2 {
-        margin-top: 20px;
-
-    }
-
-    div {
-        margin-bottom: 20px;
-        margin-left: 10px;
-        width: 45%;
-    }
-
-    p {
-        margin-left: 20px;
-        width: fit-content;
-        padding: 5px;
-    }
-
-    button {
-        margin-top: 10px;
-        background-color: #4046a0;
-        color: #fff;
-        padding: 10px 15px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-bottom: 10px;
-        font-size: 18px;
-        transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-        background-color: #2c327a;
-    }
-    .bloco{
-        margin-top: -20px;
-        margin-left: -1px;
         
+       
+        <div>
+            <strong><p>Rede</p></strong>
+            <label for="newPageTextoInput1"><strong>Tensão das baterias (voltímetro):</strong></label>
+            <strong><div class="r1"><p id="resultado1"></p></strong></div>
+            <strong> <p id="resultadoInput1"></p></strong>
+            <br>
+            <label for="newPageTextoInput2"><strong>Tensão da saída (Multímetro):</strong></label>
+            <strong><div class="r2"><p id="resultado2"></p></strong></div>
+<strong><p id="resultadoInput2"></p></strong>
+<br>
+            <strong><p>Bateria</p></strong>
+            <label for="newPageTextoInput3"><strong>Tensão das baterias:</strong></label>
+            <strong><div class="r3"><p id="resultado3"></p></strong></div>
+<strong><p id="resultadoInput3"></p></strong>
+<br>
+            <label for="newPageTextoInput4"><strong>Tensão da saída:</strong></label>
+            <strong><div class="r4"><p id="resultado4"></p></strong></div>
+ <strong><p id="resultadoInput4"></p></strong>
+        </div>
 
-
-    }
-
-    /* Additional styles for printing */
-    @media print {
-        body {
-            background-color: #fff;
-        }
-
-        button {
-            display: none; /* Hide buttons when printing */
-        }
-    }
-    </style>
+        <div>
+            <div id="infoContainer">
+                <p id="avaliacaoInfo"></p>
+            </div>
+                        <button onclick="window.location.href='pag27.html'">Proximo</button>
+            <button onclick="imprimirPagina()">Imprimir Página</button>
+        </div>
+    </div>
+</body>
 </html>
