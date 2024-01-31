@@ -32,12 +32,7 @@
         var newPageTextoInput4 = localStorage.getItem('newPageTextoInput4');
 
         // Retrieve value from localStorage for ventilador.html
-        var resultadoProximaPaginaDiv = document.getElementById('resultadoProximaPagina');
-
         var avaliacaoVentilador = localStorage.getItem('avaliacaoVentilador');
-
-// Exibir informações na página
-document.getElementById('avaliacaoInfo').innerText = 'Avaliação do Ventilador: ' + avaliacaoVentilador;
 
         // Display stored values on the page
         document.addEventListener('DOMContentLoaded', function () {
@@ -49,6 +44,7 @@ document.getElementById('avaliacaoInfo').innerText = 'Avaliação do Ventilador:
             document.getElementById('newPageTextoInput2').innerText = newPageTextoInput2;
             document.getElementById('newPageTextoInput3').innerText = newPageTextoInput3;
             document.getElementById('newPageTextoInput4').innerText = newPageTextoInput4;
+            document.getElementById('avaliacaoVentilador').innerText = avaliacaoVentilador;
         });
  // Retrieve values from local storage and display them
  document.addEventListener("DOMContentLoaded", function() {
@@ -160,10 +156,9 @@ document.getElementById('avaliacaoInfo').innerText = 'Avaliação do Ventilador:
         </div>
 
         <div>
-            <div id="infoContainer">
-                <p id="avaliacaoInfo"></p>
-            </div>
-                        <button onclick="window.location.href='pag27.html'">Proximo</button>
+            <label for="avaliacaoVentilador"><strong>Avaliação do Ventilador:</strong></label>
+            <span id="avaliacaoVentilador"></span>
+            <button onclick="window.location.href='pag27.html'">Proximo</button>
             <button onclick="imprimirPagina()">Imprimir Página</button>
         </div>
     </div>

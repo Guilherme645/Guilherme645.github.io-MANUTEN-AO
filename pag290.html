@@ -55,6 +55,8 @@
 
                 <label for="Placa">Placa:</label>
                 <input type="text" id="Placa" name="Placa" required><br>
+                <label for="Placa">Bateria (quantidade<br> e modelo):</label>
+                <input type="text" id="Bateria" name="Bateria" required><br>
 
                 <button onclick="copiarTexto()">Copiar Texto</button>
             </form>
@@ -63,8 +65,7 @@
 
     <script>
          function abrirEmail() {
-      // Substitua 'endereco@email.com' pelo endereço de e-mail desejado
-      var enderecoEmail = 'pedidodematerial@upsquality.com.br';
+      var enderecoEmail = 'almoxerifado@upsquality.com.br';
 
       // Substitua 'Assunto do E-mail' pelo assunto desejado
       var assuntoEmail = 'Pedido de materia em garantia.';
@@ -85,9 +86,11 @@
             var numeroSerie = document.getElementById("NumeroSerie").value;
             var potencia = document.getElementById("Potencia").value;
             var placa = document.getElementById("Placa").value;
+            var Bateria = document.getElementById("Bateria").value;
+
 
             // Construir o texto a ser copiado
-            var texto = `Número O.s: ${numeroOs}\nFabricante: ${fabricante}\nModelo: ${modelo}\nNúmero de Série: ${numeroSerie}\nPotência: ${potencia}\nPlaca: ${placa}`;
+            var texto = `Número O.s: ${numeroOs}\nFabricante: ${fabricante}\nModelo: ${modelo}\nNúmero de Série: ${numeroSerie}\nPotência: ${potencia}\nPlaca: ${placa}\nBateria (quantidade e modelo): ${Bateria}`;
 
             // Copiar o texto para a área de transferência
             navigator.clipboard.writeText(texto);

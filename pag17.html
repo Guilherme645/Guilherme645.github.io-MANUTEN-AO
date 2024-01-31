@@ -101,13 +101,11 @@
             resultado.classList.toggle('verde', input === 'bom');
             resultado.classList.toggle('vermelho', input === 'ruim');
             
-            // Ativar o botão "Próximo" quando uma opção é escolhida
             proximoButton.disabled = false;
         } else {
             resultado.textContent = "Resposta inválida. Por favor, digite 'bom' ou 'ruim'.";
             resultado.classList.remove('verde', 'vermelho');
             
-            // Desativar o botão "Próximo" se nenhuma opção for escolhida
             proximoButton.disabled = true;
         }
     }
@@ -128,7 +126,6 @@
     </div>
     <div class="p2"><strong><p id="resultado7"></p></strong></div>
 
-    <!-- Botão de Suporte com ícone de fone de ouvido -->
     <button id="proximoButton" class="button2" onclick="window.location.href='pag11.html'" disabled><strong>Próximo</strong></button>
 
 </body>
