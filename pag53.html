@@ -38,41 +38,44 @@
 
 <body>
     <img src="imagem 47.png" alt="">
-    <strong>
-        
-    </strong>
     <strong><div class="resultado-container">
-    
-       <p id="infoResultado"></p>
-
-       <strong> <div class="resultado-container-externo">
-        <p id="resultadoPlaca"></p>
+        <p id="resultado2"></p>
     </div></strong>
-    <div id="displayCodigoPlaca"></div>
+    <strong><div class="resultado-container">
+        <p id="spanEscolhaUsuario" class="verde">Nenhuma escolha do usuário disponível.</p>
+    </div></strong>
+    <strong><div>
+                <label for="avaliacaoVentilador"><strong>Ventilador:</strong></label>
+        <span id="avaliacaoVentilador"></span>
+    </div></strong>
+    <div>
+        <strong><div id="displayCodigoPlaca"></div></strong>
         <div>
-            <strong>
-                <p id="infoAvaliacaoVentilador"></p>
-            </strong>
-            <strong>
-                <p>Bateria</p>
-                <div id="newPageTextoInput3Mensagem" class="mensagem"></div>
-            </strong>
-        </div>
+        <br>
                 <strong><div id="resultadoBateria"></div></strong>
     </div>
-
-    <p><strong>Tamanho do Ventilador:</strong> <span id="displayTamanho"></span></p>
-    <p><strong>Potência do Ventilador:</strong> <span id="displayPotencia"></span></p>
-
     <strong><div id="displayQuantidade"></div></strong><br>
     <strong><div id="displayModelo"></div></strong>
+    
+    <p><strong>Tamanho do Ventilador:</strong> <strong><span id="displayTamanho"></span></strong></p>
+    <p><strong>Potência do Ventilador:</strong> <strong><span id="displayPotencia"></span></strong></p>
     <strong><div class="button"></div></strong>
         <button onclick="window.location.href='pag280.html'"><strong>Próximo</strong></button>
 
-        <button onclick="copiarTextoDaPagina()"><strong>Copiar Texto</strong></button>
+        <button onclick="copiarTextoDaPagina()">Copiar Texto</button>
     </div>
-   
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const storedEstado = localStorage.getItem('estadoFusivel');
+            const resultadoElement = document.getElementById('resultado2');
 
+            if (storedEstado) {
+                resultadoElement.innerHTML = `<strong>Estado do Fusível:</strong> ${storedEstado}`;
+            } else {
+                resultadoElement.innerHTML = '<span class="vermelho">Nenhum resultado disponível.</span>';
+            }
+        });
+    </script>
     <script>
              document.addEventListener('DOMContentLoaded', function () {
             // Retrieve the stored quantity of batteries and selected battery model
@@ -90,11 +93,9 @@
         });
         // Retrieve values from localStorage (replace these with actual values)
         var avaliacaoVentilador = localStorage.getItem('avaliacaoVentilador') || 'Não avaliado';
-        var resultadoFusivel = localStorage.getItem('resultadoFusivel') || 'Nenhum resultado disponível.';
         var resultadoPlaca = localStorage.getItem('resultadoPlaca') || 'Nenhuma escolha do usuário disponível.';
         
         // Display verification results on the page
-        document.getElementById('spanResultadoFusivel').textContent = resultadoFusivel;
         document.getElementById('spanEscolhaUsuario').textContent = resultadoPlaca;
         document.getElementById('avaliacaoVentilador').innerText = avaliacaoVentilador;
 
@@ -128,62 +129,10 @@
             // Alerta o usuário que o texto foi copiado (opcional)
             alert('Texto copiado para a área de transferência.');
         }
+        
     </script>
     
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            displayFusivelInfo();
-        });
-
-        function displayFusivelInfo() {
-            const storedEstado = localStorage.getItem('estadoFusivel');
-            const infoResultado = document.getElementById('infoResultado');
-
-            if (storedEstado) {
-                infoResultado.innerHTML = `Estado do Fusível: <span class="${storedEstado.includes('ruim') ? 'vermelho' : 'verde'}">${storedEstado}</span>`;
-            } else {
-                infoResultado.innerHTML = '<span class="vermelho">Nenhuma informação disponível.</span>';
-            }
-        }
-        document.addEventListener('DOMContentLoaded', function () {
-            // Retrieve the stored evaluation from local storage
-            var avaliacaoVentilador = localStorage.getItem('avaliacaoVentilador');
-
-            // Display the stored evaluation on the page
-            if (avaliacaoVentilador) {
-                document.getElementById('infoAvaliacaoVentilador').innerText = 'Ventilador: ' + avaliacaoVentilador;
-            }
-
-            // Preencher as mensagens para cada input
-            for (let i = 1; i <= 4; i++) {
-                const inputId = "newPageTextoInput" + i;
-                const mensagem = localStorage.getItem(inputId + "Mensagem");
-                const mensagemElement = document.getElementById(inputId + "Mensagem");
-
-                if (mensagemElement && mensagem) {
-                    mensagemElement.innerText = mensagem;
-                    mensagemElement.className = mensagem.includes("Danificado") ? "mensagem-erro" : "mensagem";
-                }
-            }})
-    </script>
-      <script>
-        // Recuperar a escolha do usuário da localStorage
-        var escolhaUsuario = localStorage.getItem('escolhaUsuario');
-
-        // Exibir o resultado com base na escolha do usuário
-        var resultadoPlacaElement = document.getElementById('resultadoPlaca');
-
-        if (escolhaUsuario === 'não') {
-            resultadoPlacaElement.innerText = "Placa está visivelmente normal.";
-            resultadoPlacaElement.classList.add('verde');
-        } else if (escolhaUsuario === 'sim') {
-            resultadoPlacaElement.innerText = "Placa está visivelmente queimada.";
-            resultadoPlacaElement.classList.add('vermelho');
-        } else {
-            resultadoPlacaElement.innerText = "Escolha inválida.";
-        }
-    </script>
-     <script>
         // Obter os valores do localStorage
         var tamanhoVentilador = localStorage.getItem('tamanhoVentilador');
         var potenciaVentilador = localStorage.getItem('potenciaVentilador');
@@ -192,12 +141,13 @@
         document.getElementById('displayTamanho').textContent = tamanhoVentilador;
         document.getElementById('displayPotencia').textContent = potenciaVentilador;
     </script>
-        <script>
-            // Retrieve the code from localStorage
-            var codigoPlaca = localStorage.getItem('codigoPlaca');
-    
-            // Display the code on the page
-            document.getElementById('displayCodigoPlaca').innerText = `Código da Placa: ${codigoPlaca}`;
-        </script>
+    <script>
+        // Retrieve the code from localStorage
+        var codigoPlaca = localStorage.getItem('codigoPlaca');
+
+        // Display the code on the page
+        document.getElementById('displayCodigoPlaca').innerText = `Código da Placa: ${codigoPlaca}`;
+    </script>
+    </script>
 </body>
 </html>
